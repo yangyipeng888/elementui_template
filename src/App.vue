@@ -1,32 +1,84 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view></router-view>
+    <div class="logo">本系统由广州城投智慧城市科技发展有限公司提供技术支持</div>
   </div>
 </template>
+<script>
+  export default {
+    data() {
+      return {}
+    },
+    watch: {
+      '$store.state.user.loginTimeOut'() {
+        if (this.$store.state.user.loginTimeOut) {
+          this.$alert('登录超时,请重新登录!', '登录超时', {
+            confirmButtonText: '确定',
+            callback: action => {
+              this.$router.push({name: 'login'});
+            }
+          });
+        }
+      }
+    },
+    methods: {
+      handleOpen() {
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+      },
+      handleClose() {
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+      }
     }
   }
-}
+</script>
+<style lang="scss">
+  @media (max-width: 1024px) {
+    html,
+    body {
+      font-size: 14px;
+      /*min-width: 65rem;*/
+    }
+  }
+
+  @media (min-width: 1280px) {
+    html,
+    body {
+      font-size: 16px;
+      /*min-width: 70rem;*/
+    }
+  }
+
+  @media (min-width: 1281px) {
+    html,
+    body {
+      font-size: 18px;
+      /*min-width: 80rem;*/
+    }
+  }
+
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  #app {
+    height: 100%;
+    width: 100% !important;
+    margin: 0;
+    padding: 0;
+
+    .logo {
+      font-size: 0.8rem;
+      color: black;
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+    }
+
+  }
 </style>
